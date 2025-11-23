@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="자동차 연료 절감기 전문 회사, 친환경 기술 선두주자">
+<meta name="keywords" content="자동차, 연료절감, 친환경, 그린테크">
+<meta name="robots" content="index, follow">
+<title>자동차 연료 절감기 회사</title>
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html, body { width:100%; overflow-x:hidden; font-family:'Noto Sans KR', sans-serif; }
+  body { padding-top:80px; color:#333; }
+
+  /* 헤더 */
+  header {
+    position: fixed; top:0; left:0; width:100%; height:80px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 30px;
+    background-color: #2c3e50;
+    color: white;
+    z-index: 1000;
+    transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+  }
+  header.light-header {
+    background: linear-gradient(135deg, #f2f3f5, #e6e8ea);
+    color: #222;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  header h1 { font-size: 1.8em; color: white; transition: color 0.3s; }
+  header.light-header h1 { color: #222; }
+  .company-logo { width:50px; height:auto; }
+
+  nav { display:flex; gap:20px; }
+  nav a { color:inherit; text-decoration:none; font-weight:bold; cursor:pointer; transition: color 0.3s; }
+  nav a:hover { color:#16a085; }
+
+  .content { max-width:1200px; margin:0 auto; padding:20px; }
+  footer { text-align:center; padding:20px; background:#f1f1f1; color:#555; }
+
+  /* Hero 섹션 */
+  .hero-section {
+    width:100%; min-height:100vh; margin-top:-80px; padding-top:80px;
+    background-image:url('./img/city.jpg');
+    background-size:cover; background-position:center;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; color:white; position:relative; z-index:0;
+  }
+  .hero-section::before {
+    content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.45); z-index:0;
+  }
+  .hero-section h2, .hero-section p, .hero-section a { position:relative; z-index:1; }
+
+  .cta-button {
+    display:inline-block; background:#16a085; color:white; padding:12px 25px;
+    text-decoration:none; border-radius:5px; font-weight:bold; margin-top:20px;
+    transition:0.3s;
+  }
+  .cta-button:hover { background:#1abc9c; }
+
+  /* 제품소개 / 공용 섹션 */
+  .product-intro, .product-demo, .principle-images {
+    display:flex; flex-wrap:wrap; justify-content:center; gap:40px; align-items:center;
+  }
+  .product-intro img, .principle-images img, .demo-image img {
+    max-width:450px; width:100%; border-radius:10px;
+  }
+  .product-intro img { margin-bottom:40px; }
+  .product-intro .text { max-width:600px; line-height:1.6; font-size:1.1em; font-weight:600; margin-top:-30px; }
+  .section-title { font-size:1.5rem; font-weight:700; border-left:5px solid #0a9a7a; padding-left:10px; margin-bottom:20px; display:inline-block; color:#2c3e50; }
+
+  .demo-videos { display:flex; flex-direction:column; gap:20px; width:60%; }
+  .demo-videos video { width:100%; border-radius:10px; }
+  .demo-image { width:350px; }
+
+  /* Certificate Slider */
+  .certificate-slider { overflow:hidden; position:relative; width:100%; margin-bottom:80px; }
+  .certificate-track { display:flex; width:calc(250px*12); animation:slideLoop 25s linear infinite; }
+  .certificate-item { flex:0 0 auto; width:250px; margin-right:20px; }
+  .certificate-item img { width:100%; border-radius:10px; }
+  @keyframes slideLoop { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+  .certificate-slider:hover .certificate-track { animation-play-state: paused; }
+
+  /* 오시는길 */
+  .contact-traffic-wrapper { max-width:800px; margin:40px auto; display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; }
+  .address-contact, .transportation { flex:1; min-width:300px; }
+  .address-contact h3, .transportation h3 { color:#2c3e50; margin-bottom:20px; }
+  .address-contact p, .transportation p { display:flex; align-items:center; gap:10px; margin-bottom:12px; color:#136ab9; font-weight:bold; }
+  .transportation p span { color:#136ab9; font-weight:bold; }
+  .transportation p.description { font-weight:normal; color:#555; margin-left:34px; display:block; }
+
+  /* 성능사례 */
+  .performance-images {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 이미지 중심 맞춤 */
+    gap: 20px;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+  }
+  .performance-images .image-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 일반 글씨 굵게 + 크기 조정 (연두색/빨간색 제외) */
+  .performance-images .image-box p {
+    font-weight: 700;
+    font-size: 1.1em;
+    margin: 8px 0 0 0;
+    text-align: center;
+  }
+
+  /* 연두색/빨간색 글씨는 기존 스타일 유지 */
+  .performance-images .image-box p span {
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #16a085;
+  }
+  .performance-images .image-box p .increase {
+    color: #e74c3c;
+    font-weight: 700;
+    font-size: 1.3em;
+  }
+
+  .performance-images img {
+    width: 260px;
+    height: auto;
+    border-radius: 10px;
+  }
+  .performance-images img.large-img {
+    width: 400px;
+    height: auto;
+  }
+
+  /* 반응형 */
+  @media screen and (max-width:768px) {
+    .product-intro, .product-demo { flex-direction:column; }
+    .demo-videos, .demo-image { width:100%; }
+    .principle-images img { width:90%; }
+    .header-left { gap:5px; }
+    .company-logo { width:40px; }
+    .performance-images { flex-direction: column; align-items: center; }
+    .performance-images img { width:100%; margin-bottom:10px; }
+    .performance-images img.large-img { width:90%; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-left">
+    <h1>그린테크</h1>
+    <img src="./img/logo.png" alt="회사 로고" class="company-logo">
+  </div>
+  <nav>
+    <a onclick="loadContent('home')">홈</a>
+    <a onclick="loadContent('product')">제품소개</a>
+    <a onclick="loadContent('performance')">성능사례</a>
+    <a onclick="loadContent('patent')">특허/인증서</a>
+    <a onclick="loadContent('location')">오시는길</a>
+  </nav>
+</header>
+
+<div class="content" id="contentArea"></div>
+
+<footer id="footer">
+  © 2025 자동차 연료 절감기 회사. All rights reserved.
+</footer>
+
+<script>
+const HEADER_HEIGHT = 80;
+
+function loadContent(page) {
+  const content = document.getElementById('contentArea');
+  const header = document.getElementById('header');
+  const footer = document.getElementById('footer');
+
+  if(page === 'home') {
+    header.classList.remove('light-header');
+    header.style.backgroundColor = 'transparent';
+    content.style.maxWidth = '100%';
+    content.style.margin = '0';
+    content.style.padding = '0';
+  } else {
+    header.classList.add('light-header');
+    content.style.maxWidth = '1200px';
+    content.style.margin = '0 auto';
+    content.style.padding = '20px';
+  }
+
+  let html = '';
+  switch(page){
+    case 'home':
+      html = `<div class="hero-section" id="homeSection">
+        <h2>연료 절감으로 미래를 바꿉니다</h2>
+        <p>친환경·고효율 자동차 연료 절감기 기술의 선두주자</p>
+      </div>`;
+      footer.style.backgroundColor = 'transparent';
+      break;
+
+    case 'product':
+      html = `<div class="product-section" id="productSection">
+        <h2 class="section-title">제품소개</h2>
+        <div class="product-intro">
+          <img src="./img/product1.jpg" alt="제품 이미지">
+          <div class="text"><p>자동차의 효율증강장치로 엔진에 공급되는 공기의량과 질을 개선함으로써 동력의 출력을 높이는 원천기술을 적용한 세계최초 발명특허(효율증가장치) 신기술 개발제품이다.
+효율증가장치 장착 시, 출력증강 효과로 5~10마력 이상 증가하며 연료절감 10~15% 및 매연저감 50~90% 효과가 있다.</p></div>
+        </div>
+        <h2 class="section-title">제품 동작원리 및 특징</h2>
+        <div class="principle-images">
+          <img src="./img/principle1.jpg" alt="제품 원리1">
+          <img src="./img/principle2.jpg" alt="제품 원리2">
+        </div>
+      </div>`;
+      footer.style.backgroundColor = '#f1f1f1';
+      break;
+
+    case 'performance':
+      html = `<div class="performance-section" id="performanceSection">
+        <div class="performance-content">
+          <h3 class="section-title">연비측정</h3>
+          <div class="performance-images">
+            <div class="image-box">
+              <img src="./img/dusql1.jpg" alt="연비측정1">
+              <p>연비 측정 전(<span>9.5km</span>)</p>
+            </div>
+            <div class="image-box">
+              <img src="./img/dusql2.jpg" alt="연비측정2">
+              <p>연비 측정 후(<span>15.6km</span>)</p>
+            </div>
+            <div class="image-box">
+              <img src="./img/rmfovm.png" alt="연비 개선 그래프" class="large-img">
+              <p>1449km 운행 후 연비 변화 그래프(<span class="increase">약64.2% 증가)</span></p>
+            </div>
+          </div>
+
+          <br>
+          <h3 class="section-title">매연측정(1)</h3>
+          <div class="performance-images">
+            <div class="image-box">
+              <img src="./img/gas_car1.jpg" alt="매연측정1">
+              <p>측정 차량</p>
+            </div>
+            <div class="image-box">
+              <img src="./img/gas_test1.jpg" alt="매연측정2">
+              <p>측정 전</p>
+            </div>
+            <div class="image-box">
+              <img src="./img/gas_test2.jpg" alt="매연측정3">
+              <p>측정 후</p>
+            </div>
+          </div>
+
+          <br>
+          <h3 class="section-title">매연측정(2)</h3>
+          <div class="performance-images">
+            <div class="image-box">
+              <img src="./img/gas_car2.jpg" alt="매연측정2-1">
+              <p>측정 차량</p>
+            </div>
+            <div class="image-box">
+              <img src="./img/gas_test3.jpg" alt="매연측정2-2">
+              <p>측정 후</p>
+            </div>
+            <div class="image-box">
+              <img src="./img/gas_test4.png" alt="매연측정2-2">
+              <p>매연 미검출</p>
+            </div>
+          </div>
+        </div>
+      </div>`;
+      footer.style.backgroundColor = '#f1f1f1';
+      break;
+
+    case 'patent':
+      html = `<div class="certificate-section" id="patentSection">
+        <h2 class="section-title">특허증</h2>
+        <div class="certificate-slider">
+          <div class="certificate-track">
+            ${[1,2,3,4,5,6,1,2,3,4,5,6].map(i=>`<div class="certificate-item"><img src="./img/test${i}.jpg" alt="특허증${i}"></div>`).join('')}
+          </div>
+        </div>
+        <h2 class="section-title">인증서</h2>
+        <div class="certificate-slider">
+          <div class="certificate-track">
+            ${[1,2,3,4,1,2,3,4].map(i=>`<div class="certificate-item"><img src="./img/cert${i}.jpg" alt="인증서${i}"></div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+      footer.style.backgroundColor = '#f1f1f1';
+      break;
+
+    case 'location':
+      html = `<div class="section" id="locationSection">
+        <h2 class="section-title">오시는길</h2>
+        <iframe src="https://maps.google.com/maps?q=경기도 부천시 송내대로42번길 93&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="450" style="border:0; display:block;" allowfullscreen></iframe>
+        <div class="contact-traffic-wrapper">
+          <div class="address-contact">
+            <h3>주소&amp;연락처</h3>
+            <p><img src="https://img.icons8.com/ios-filled/24/136ab9/marker.png"/><span>경기도 부천시 송내대로42번길 93 지하1층</span></p>
+            <p><img src="https://img.icons8.com/ios-filled/24/136ab9/fax.png"/><span>E-mail : ksg0493@naver.com</span></p>
+            <p><img src="https://img.icons8.com/ios-filled/24/136ab9/phone.png"/><span>대표전화 070-5066-5340</span></p>
+            <p><img src="https://img.icons8.com/ios-filled/24/136ab9/smartphone.png"/><span>휴대폰 010-8388-8146</span></p>
+          </div>
+          <div class="transportation">
+            <h3>교통편</h3>
+            <p><img src="https://img.icons8.com/ios-filled/24/136ab9/train.png"/><span>metro</span></p>
+            <p class="description">중동역 1호선에서 송내역 방향으로 약 430m 직진</p>
+            <p><img src="https://img.icons8.com/ios-filled/24/136ab9/car.png"/><span>자가용 이용시</span></p>
+            <p class="description">부천 IC에서 송내역 방면으로 약 1.2km 직진</p>
+          </div>
+        </div>
+      </div>`;
+      footer.style.backgroundColor = '#f1f1f1';
+      break;
+  }
+
+  content.innerHTML = html;
+
+  const sectionIdMap = {home:'homeSection',product:'productSection',performance:'performanceSection',patent:'patentSection',location:'locationSection'};
+  const targetSection = document.getElementById(sectionIdMap[page]);
+  if(targetSection){
+    const y = targetSection.getBoundingClientRect().top + window.pageYOffset - HEADER_HEIGHT;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+window.onload = function() {
+  loadContent('home');
+};
+</script>
+</body>
+</html>
